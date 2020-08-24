@@ -1,4 +1,4 @@
-#Importing
+#IMPORTING
 from tkinter import *
 from tkinter.messagebox import *
 from tkinter.filedialog import *
@@ -6,39 +6,38 @@ import datetime
 import os
 import time
 
-#Creating and initializing the window
+#CREATING AND INITILIAZING THE WINDOW
 root = Tk()
 root.title("NText")
 root.geometry("300x300")
 root.resizable(height=None,width=None)
 
-#*****Status bar*****
-
+#STATUS BAR
 statbarb = Label(root, text="Ln", relief=SUNKEN, bd=2, anchor="w")
 
-#*****Global variables*****
-
-#Variable for the present file loaded
+#GLOBAL VARIABLE FOR THE PRESENT FILE LOADED
 filvar=None
 
 #*****Text Area*****
 
-#Adding the text area
+#ADDING THE TEXT ARENA
 textarea=Text(root,undo=True,wrap=None,height=root.winfo_height(),width=root.winfo_width())
 textarea.grid(row=0,sticky=N + E+ S + W)
-#Making the text area auto resizable
+
+#MAKING THE TEXT AREAA AUTO RESIZABLE
 root.grid_rowconfigure(0, weight=1)
 root.grid_columnconfigure(0, weight=1)
 
 #*****Scroll Bar******
-#Creating the vertical scrollbar
+
+#CREATING THE VERTICAL SCROLLBAR
 scrollbarv=Scrollbar(textarea,command=textarea.yview)
-#Adding the scrollbar to root
+#ADDING THE SCROLLBAR TO THE ROOT
 textarea.config(yscrollcommand=scrollbarv.set)
-#Packing the scrollbar
+#PACKING THE SCROLLBAR
 scrollbarv.pack(side=RIGHT, fill=Y)
 
-#*****Various functions of the text editor
+#VARIOUS FUNCTIONS OF THE TEXT EDITOR
 def createnew(*args):
     global root, textarea, filvar
     filvar=None
@@ -137,18 +136,17 @@ def exitwithoutsaving():
     else:
         exitapplication()
 
-#*****Binding shortcut keys to functions*****
-
+#BINDING SHORTCUT KEYS TO FUNCTIONS
 textarea.bind("<F5>",datetimefunc)
 textarea.bind("<Control-n>",createnew)
 textarea.bind("<Control-s>",savefile)
 textarea.bind("<Control-o>",openfile)
-#*****Adding the menus*****
+
+#ADDING THE MENUS
 menu=Menu(root)
 root.config(menu=menu)
 
-#Adding the File submenu
-
+#ADDING THE FILE SUB-MENU
 submenu1=Menu(menu,tearoff=0)
 menu.add_cascade(label="File",menu=submenu1)
 submenu1.add_command(label="New    Ctrl+N",command=createnew)
@@ -158,8 +156,7 @@ submenu1.add_command(label="Save as",command=saveasfile)
 submenu1.add_separator()
 submenu1.add_command(label="Exit",command=exitwithoutsaving)
 
-#Adding the Edit submenu
-
+#ADDING THE EDIT SUB-MENU
 submenu2=Menu(menu,tearoff=0)
 menu.add_cascade(label="Edit",menu=submenu2)
 submenu2.add_command(label="Undo        Ctrl+Z",command=undofunc)
@@ -173,8 +170,7 @@ submenu2.add_separator()
 submenu2.add_command(label="Select all    Ctrl+A",command=selectall)
 submenu2.add_command(label="Date/Time   F5",command=datetimefunc)
 
-#Adding the view submenu
-
+#ADDING THE VIEW SUB-MENU
 submenu3=Menu(menu,tearoff=0)
 submenu5=Menu(submenu3,tearoff=0,postcommand=findwordcount)
 submenu6=Menu(submenu3,tearoff=0,postcommand=findlinecount)
@@ -183,9 +179,8 @@ submenu3.add_cascade(label="Word Count",menu=submenu5)
 submenu3.add_cascade(label="Line Count",menu=submenu6)
 submenu5.add_command(label="0 Words",command=None)
 submenu6.add_command(label="0 Lines",command=None)
-#Adding the about submenu
 
+#ADDING THE ABOUT SUB-MENU
 submenu4=Menu(menu,tearoff=0)
 menu.add_command(label="About",command=about)
 root.mainloop()
-
